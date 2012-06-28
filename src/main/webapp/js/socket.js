@@ -39,7 +39,7 @@
 	    e.preventDefault();
 	    if (window.WebSocket) {
 		if (socket.readyState == WebSocket.OPEN) {
-		    socket.send(document.forms.inputform.message.value);
+		    socket.send(event.target.message.value);
 		} else {
 		    alert("The socket is not open.");
 		}
