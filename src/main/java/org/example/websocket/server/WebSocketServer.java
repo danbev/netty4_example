@@ -25,9 +25,9 @@ public class WebSocketServer {
                 @Override
                 public void initChannel(final SocketChannel ch) throws Exception {
                     ch.pipeline().addLast(new HttpRequestDecoder(),
-                            new HttpChunkAggregator(65536),
-                            new HttpResponseEncoder(),
-                            new WebSocketServerHandler());
+                        new HttpChunkAggregator(65536),
+                        new HttpResponseEncoder(),
+                        new WebSocketServerHandler());
                 }
             });
 
