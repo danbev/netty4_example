@@ -16,11 +16,11 @@ import java.net.InetSocketAddress;
 public class WebSocketServer {
     
     public static void main(String[] args) throws Exception {
-	    final ServerBootstrap sb = new ServerBootstrap();
-	    try {
-	        sb.eventLoop(new NioEventLoop(), new NioEventLoop())
-	         .channel(new NioServerSocketChannel())
-	         .localAddress(new InetSocketAddress(8080))
+        final ServerBootstrap sb = new ServerBootstrap();
+        try {
+            sb.eventLoop(new NioEventLoop(), new NioEventLoop())
+             .channel(new NioServerSocketChannel())
+             .localAddress(new InetSocketAddress(8080))
              .childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 public void initChannel(final SocketChannel ch) throws Exception {
@@ -31,13 +31,13 @@ public class WebSocketServer {
                 }
             });
 
-	        final Channel ch = sb.bind().sync().channel();
-	        System.out.println("Web socket server started at port 8080");
+            final Channel ch = sb.bind().sync().channel();
+            System.out.println("Web socket server started at port 8080");
 
-	        ch.closeFuture().sync();
-	    } finally {
-	        sb.shutdown();
-	    }
+            ch.closeFuture().sync();
+        } finally {
+            sb.shutdown();
+        }
     }
 
 
