@@ -7,12 +7,10 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioEventLoop;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.Delimiters;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.util.CharsetUtil;
 
 import java.net.InetSocketAddress;
+
+import org.example.codec.Decoder;
 
 
 public class NettyServer {
@@ -33,9 +31,11 @@ public class NettyServer {
             .childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 public void initChannel(final SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new DelimiterBasedFrameDecoder(512, true, Delimiters.lineDelimiter()),
-                    new StringDecoder(CharsetUtil.UTF_8),
-                    new ServerHandler());
+                    //ch.pipeline().addLast(new DelimiterBasedFrameDecoder(512, true, Delimiters.lineDelimiter()),
+                    //new StringDecoder(CharsetUtil.UTF_8),
+                    ch.pipeline().addLast(new Decoder(),
+                    //new StringDecoder(CharsetUtil.UTF_8),
+                    new ServerEnvelopeHandler());
                 }
             });
             
